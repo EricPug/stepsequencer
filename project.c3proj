@@ -1,0 +1,321 @@
+{
+	"projectFormatVersion": 1,
+	"savedWithRelease": 44902,
+	"name": "sequencer",
+	"runtime": "c3",
+	"useWorker": "dom",
+	"bundleAddons": false,
+	"usedAddons": [
+		{
+			"type": "plugin",
+			"id": "Mouse",
+			"name": "Mouse",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Sprite",
+			"name": "Sprite",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Text",
+			"name": "Text",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "TiledBg",
+			"name": "Tiled Background",
+			"author": "Scirra",
+			"bundled": false
+		}
+	],
+	"uniqueId": "uvxpzypas8z",
+	"objectTypes": {
+		"items": [
+			"stepbutton",
+			"Sprite2",
+			"Sprite3",
+			"PlayButton",
+			"button",
+			"edge",
+			"Text",
+			"texture",
+			"TiledBackground",
+			"Text2",
+			"Sprite4",
+			"Sprite",
+			"displaytext",
+			"controlknob",
+			"Mouse",
+			"Text3"
+		],
+		"subfolders": []
+	},
+	"functionsName": "Functions",
+	"autosaveData": null,
+	"containers": [],
+	"families": {
+		"items": [],
+		"subfolders": []
+	},
+	"layouts": {
+		"items": [
+			"Layout 1"
+		],
+		"subfolders": []
+	},
+	"eventSheets": {
+		"items": [
+			"Event sheet 1"
+		],
+		"subfolders": []
+	},
+	"rootFileFolders": {
+		"script": {
+			"items": [
+				{
+					"name": "globals.js",
+					"type": "application/javascript",
+					"sid": 625580666186417,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "main.js",
+					"type": "application/javascript",
+					"sid": 196720064973375,
+					"script-info": {
+						"purpose": "main"
+					}
+				}
+			],
+			"subfolders": []
+		},
+		"sound": {
+			"items": [
+				{
+					"name": "808cow.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 631081501660626,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808maracas.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 335131919076814,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808OHH.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 285552200104460,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808rim.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 921828837747434,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808snare.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 747469488948711,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808bass.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 281778075326675,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808CHH.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 770718780231518,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808claves.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 234366491715451,
+					"file-info": {
+						"purpose": "none"
+					}
+				}
+			],
+			"subfolders": []
+		},
+		"music": {
+			"items": [],
+			"subfolders": []
+		},
+		"video": {
+			"items": [],
+			"subfolders": []
+		},
+		"font": {
+			"items": [],
+			"subfolders": []
+		},
+		"icon": {
+			"items": [
+				{
+					"name": "icon-16.png",
+					"type": "image/png",
+					"sid": 311497452664754,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-32.png",
+					"type": "image/png",
+					"sid": 827315480901598,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-64.png",
+					"type": "image/png",
+					"sid": 364786202831495,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-128.png",
+					"type": "image/png",
+					"sid": 689229295593764,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-256.png",
+					"type": "image/png",
+					"sid": 101637709520805,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "icon-512.png",
+					"type": "image/png",
+					"sid": 179217574688981,
+					"icon-info": {
+						"purpose": "app-icon"
+					}
+				},
+				{
+					"name": "loading-logo.png",
+					"type": "image/png",
+					"sid": 724022287882313,
+					"icon-info": {
+						"purpose": "loading-logo"
+					}
+				}
+			],
+			"subfolders": []
+		},
+		"general": {
+			"items": [],
+			"subfolders": []
+		}
+	},
+	"timelines": {
+		"items": [
+			"Timeline 1"
+		],
+		"subfolders": [
+			{
+				"items": [],
+				"subfolders": []
+			}
+		]
+	},
+	"flowcharts": {
+		"items": [
+			"Flowchart 1"
+		],
+		"subfolders": []
+	},
+	"properties": {
+		"description": "",
+		"version": "1.0.0.0",
+		"autoIncrementVersion": false,
+		"author": "EricPug",
+		"authorEmail": "EricPug@protonmail.com",
+		"authorWebsite": "",
+		"appId": "",
+		"pixelRounding": true,
+		"zAxisScale": "normalized",
+		"fov": 0.7853981633974483,
+		"useLoaderLayout": false,
+		"fullscreenMode": "letterbox-integer-scale",
+		"fullscreenQuality": "low",
+		"viewportFit": "auto",
+		"backgroundColor": [
+			0,
+			0,
+			0,
+			0
+		],
+		"splashColor": [
+			1,
+			1,
+			1,
+			0
+		],
+		"useThemeColor": false,
+		"themeColor": [
+			1,
+			1,
+			1,
+			0
+		],
+		"orientations": "landscape",
+		"webgpu": "auto",
+		"gpuPreference": "high-performance",
+		"scriptsType": "module",
+		"framerateMode": "vsync",
+		"sampling": "nearest",
+		"downscaling": "medium",
+		"renderingMode": "auto",
+		"anisotropicFiltering": "auto",
+		"zNear": 1,
+		"zFar": 10000,
+		"maxSpriteSheetSize": 2048,
+		"loaderStyle": "splash",
+		"preloadSounds": true,
+		"cordovaiOSScheme": "app",
+		"cordovaAndroidScheme": "https",
+		"exportFileStructure": "folders",
+		"uidAllocationMode": "increment"
+	},
+	"viewportWidth": 1600,
+	"viewportHeight": 1200,
+	"firstLayout": null
+}
