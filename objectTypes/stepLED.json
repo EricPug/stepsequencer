@@ -1,10 +1,25 @@
 {
-	"name": "Sprite2",
+	"name": "stepLED",
 	"plugin-id": "Sprite",
 	"sid": 821271802060434,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "stepIndex",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 789532971304477
+		},
+		{
+			"name": "instrumentIndex",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 955069826439633
+		}
+	],
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {

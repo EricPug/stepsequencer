@@ -39,9 +39,9 @@
 	"objectTypes": {
 		"items": [
 			"stepbutton",
-			"Sprite2",
+			"stepLED",
 			"Sprite3",
-			"PlayButton",
+			"playbutton",
 			"button",
 			"edge",
 			"Text",
@@ -71,9 +71,7 @@
 		"subfolders": []
 	},
 	"eventSheets": {
-		"items": [
-			"Event sheet 1"
-		],
+		"items": [],
 		"subfolders": []
 	},
 	"rootFileFolders": {
@@ -93,6 +91,30 @@
 					"sid": 196720064973375,
 					"script-info": {
 						"purpose": "main"
+					}
+				},
+				{
+					"name": "sequencer.js",
+					"type": "application/javascript",
+					"sid": 124705674537296,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "uilayer.js",
+					"type": "application/javascript",
+					"sid": 985626222720573,
+					"script-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "playsample.js",
+					"type": "application/javascript",
+					"sid": 188208565498997,
+					"script-info": {
+						"purpose": "none"
 					}
 				}
 			],
