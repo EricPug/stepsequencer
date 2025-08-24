@@ -1,8 +1,5 @@
 /// playsample.js
 
-
-import Globals from "./globals.js";
-
 // Map track index → AudioBuffer
 const samples = [];
 
@@ -15,14 +12,25 @@ export const initSamples = (audioBuffers) => {
 let audioCtx = null;
 
 export const playSample = (trackIndex, when = 0) => {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  console.log(`[audio] Attempting to play sample ${trackIndex}, when=${when}`);
+  
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    console.log(`[audio] Created AudioContext, state: ${audioCtx.state}`);
+  }
+  
   const buffer = samples[trackIndex];
-  if (!buffer) return;
-
+  if (!buffer) {
+    console.warn(`[audio] No buffer found for track ${trackIndex}. Available samples:`, samples.length);
+    return;
+  }
+  
+  console.log(`[audio] Playing buffer for track ${trackIndex}, duration: ${buffer.duration}s`);
+  
   const source = audioCtx.createBufferSource();
   source.buffer = buffer;
   source.connect(audioCtx.destination);
-
-  // 'when' is in seconds relative to AudioContext.currentTime
   source.start(when || audioCtx.currentTime);
+  
+  console.log(`[audio] Sample ${trackIndex} started at ${audioCtx.currentTime}`);
 };
