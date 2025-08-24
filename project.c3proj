@@ -79,7 +79,9 @@
 		"subfolders": []
 	},
 	"eventSheets": {
-		"items": [],
+		"items": [
+			"Event sheet 1"
+		],
 		"subfolders": []
 	},
 	"rootFileFolders": {
@@ -148,7 +150,7 @@
 					}
 				},
 				{
-					"name": "808OHH.webm",
+					"name": "808ohh.webm",
 					"type": "audio/webm; codecs=opus",
 					"sid": 285552200104460,
 					"file-info": {
@@ -180,7 +182,7 @@
 					}
 				},
 				{
-					"name": "808CHH.webm",
+					"name": "808chh.webm",
 					"type": "audio/webm; codecs=opus",
 					"sid": 770718780231518,
 					"file-info": {
@@ -292,7 +294,7 @@
 		"subfolders": []
 	},
 	"properties": {
-		"description": "",
+		"description": "This is Eric's attempt to learn Construct 3 while avoiding the use of event sheets as much as possible.\n\nThis is a 8 instrument 16 step step sequencer.",
 		"version": "1.0.0.0",
 		"autoIncrementVersion": false,
 		"author": "EricPug",

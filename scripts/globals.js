@@ -7,6 +7,16 @@ const Globals = {
   controlknobSpeed: 0.5,
   runtime: null,
   sampleFiles: [],  // Will be populated with audio file names
+  signalNames: [
+    "808bass",
+    "808chh",
+    "808claves",
+    "808cow",
+    "808maracas",
+    "808ohh",
+    "808rim",
+    "808snare"
+  ],
 
   init(runtimeInstance) {
     this.runtime = runtimeInstance;
