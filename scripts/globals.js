@@ -6,6 +6,7 @@ const Globals = {
   minBpm: 30,
   controlknobSpeed: 0.5,
   runtime: null,
+  sampleFiles: [],  // Will be populated with audio file names
 
   init(runtimeInstance) {
     this.runtime = runtimeInstance;

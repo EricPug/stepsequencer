@@ -5,47 +5,41 @@ import "./playsample.js";
 
 let g_runtime = null;
 
-// load and initialize samples
-async function loadSamples(runtime) {
-  const sampleFiles = [
-    "808bass.webm",
-    "808CHH.webm", 
-    "808claves.webm",
-    "808cow.webm",
-    "808maracas.webm",
-    "808rim.webm",
-    "808snare.webm",
-    "808OHH.webm"
-  ];
-  
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const audioBuffers = [];
-  
-  for (const filename of sampleFiles) {
-    try {
-      // Load file from Construct 3's file system using the correct API
-      const arrayBuffer = await runtime.assets.fetchArrayBuffer(filename);
-      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-      audioBuffers.push(audioBuffer);
-      console.log(`[audio] Loaded ${filename}, duration: ${audioBuffer.duration}s`);
-    } catch (error) {
-      console.error(`[audio] Failed to load ${filename}:`, error);
-    }
+// Define available samples
+const sampleFiles = [
+  "808bass.webm",
+  "808CHH.webm", 
+  "808claves.webm",
+  "808cow.webm",
+  "808maracas.webm",
+  "808rim.webm",
+  "808snare.webm",
+  "808OHH.webm"
+];
+
+// Initialize audio using Construct's Audio object
+function initAudio(runtime) {
+  // Verify Audio object exists
+  const audio = runtime.objects.Audio;
+  if (!audio) {
+    console.error("[audio] No Audio object found in project");
+    return false;
   }
-  
-  // Initialize the samples array
-  initSamples(audioBuffers);
-  console.log(`[audio] Initialized ${audioBuffers.length} samples`);
+
+  // Store the sample names in Globals for use by other modules
+  Globals.sampleFiles = sampleFiles;
+  Globals.runtime = runtime;  // We'll need this for playing sounds
+
+  console.log(`[audio] Initialized ${sampleFiles.length} samples`);
+  return true;
 }
 
 runOnStartup(async runtime => {
   g_runtime = runtime;
 
-  // Load samples first, but continue even if it fails
-  try {
-    await loadSamples(runtime);
-  } catch (err) {
-    console.error("Error loading samples:", err);
+  // Initialize audio system
+  if (!initAudio(runtime)) {
+    console.error("[audio] Failed to initialize audio system");
+    return;
   }
-
 });
