@@ -47,8 +47,12 @@ async function loadSamples(runtime) {
 runOnStartup(async runtime => {
   g_runtime = runtime;
 
-  // Load samples first
-  await loadSamples(runtime);
+  // Load samples first, but continue even if it fails
+  try {
+    await loadSamples(runtime);
+  } catch (err) {
+    console.error("Error loading samples:", err);
+  }
 
   // Initialize display text after layout starts
   runtime.addEventListener("afterlayoutstart", () => {
