@@ -19,6 +19,20 @@ function initObjects(runtime) {
     console.log(
       `[ui] init OK. playButton=${!!playButton} buttons=${stepButtons.length} leds=${stepLEDs.length}`
     );
+    
+    // Diagnostic: Check all buttons for missing instance variables
+    let missingVars = 0;
+    for (const btn of stepButtons) {
+      if (!btn.instVars || typeof btn.instVars.instrumentIndex === 'undefined' || typeof btn.instVars.stepIndex === 'undefined') {
+        missingVars++;
+      }
+    }
+    if (missingVars > 0) {
+      console.warn(`[ui] Found ${missingVars} buttons with missing instance variables out of ${stepButtons.length} total`);
+    } else {
+      console.log(`[ui] All ${stepButtons.length} buttons have proper instance variables!`);
+    }
+    
     inited = true;
   } catch (e) {
     console.error("[ui] init error:", e);
@@ -43,18 +57,19 @@ runOnStartup(async runtime => {
 
     // Play/Stop
     if (playButton && playButton.containsPoint(mx, my)) {
+      console.log("[ui] Play button clicked!");
       if (!Sequencer.isPlaying()) {
         Sequencer.start((stepIndex /*, pattern, time */) => {
           // LED highlight per step.
           for (const led of stepLEDs) {
-            if (typeof led.stepIndex === 'undefined') {
+            if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
               continue; // Skip LEDs without stepIndex
             }
             
             if (typeof led.animationFrame === "number") {
-              led.animationFrame = led.stepIndex === stepIndex ? 1 : 0;
+              led.animationFrame = led.instVars.stepIndex === stepIndex ? 1 : 0;
             } else {
-              led.opacity = led.stepIndex === stepIndex ? 1 : 0.2;
+              led.opacity = led.instVars.stepIndex === stepIndex ? 1 : 0.2;
             }
           }
         });
@@ -72,13 +87,20 @@ runOnStartup(async runtime => {
     if (stepButtons.length) {
       for (const btn of stepButtons) {
         if (btn.containsPoint(mx, my)) {
-          if (typeof btn.instrumentIndex === 'undefined' || typeof btn.stepIndex === 'undefined') {
-            console.warn('[ui] Button missing instance variables:', btn);
+          // Access instance variables through instVars property
+          if (!btn.instVars || typeof btn.instVars.instrumentIndex === 'undefined' || typeof btn.instVars.stepIndex === 'undefined') {
+            console.warn('[ui] Button missing instance variables. Has instVars:', !!btn.instVars);
             continue;
           }
 
-          const i = btn.instrumentIndex | 0;
-          const s = btn.stepIndex | 0;
+          const i = btn.instVars.instrumentIndex | 0;
+          const s = btn.instVars.stepIndex | 0;
+
+          // Extra validation
+          if (i < 0 || i >= 8 || s < 0 || s >= 16) {
+            console.warn('[ui] Button has invalid indices. instrumentIndex:', i, 'stepIndex:', s);
+            continue;
+          }
 
           Globals.sequencerState[i][s] = !Globals.sequencerState[i][s];
 
@@ -99,14 +121,14 @@ runOnStartup(async runtime => {
     if (step == null || !stepLEDs.length) return;
 
     for (const led of stepLEDs) {
-      if (typeof led.stepIndex === 'undefined') {
+      if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
         continue; // Skip LEDs without stepIndex
       }
 
       if (typeof led.animationFrame === "number") {
-        led.animationFrame = led.stepIndex === step ? 1 : 0;
+        led.animationFrame = led.instVars.stepIndex === step ? 1 : 0;
       } else {
-        led.opacity = led.stepIndex === step ? 1 : 0.2;
+        led.opacity = led.instVars.stepIndex === step ? 1 : 0.2;
       }
     }
   });
