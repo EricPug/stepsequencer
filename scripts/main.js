@@ -1,4 +1,9 @@
 import Globals from "./globals.js";
+import "./sequencer.js";
+import "./uilayer.js";
+import "./playsample.js";
+//import { runOnStartup } from "./c2runtime.js";
+
 
 let isDragging = false;
 let startY = 0;
@@ -61,6 +66,6 @@ runOnStartup(async runtime => {
   // Mouse up: stop dragging
   runtime.addEventListener("mouseup", () => {
     isDragging = false;
-    console.log("Mouse released. BPM:", Globals.bpm.toString());
+    //console.log("Mouse released. BPM:", Globals.bpm.toString());
   });
 });

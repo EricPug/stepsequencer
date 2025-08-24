@@ -1,3 +1,6 @@
+/// sequencer.js
+
+
 import Globals from "./globals.js";
 import { playSample } from "./playsample.js";
 
@@ -67,13 +70,14 @@ const Sequencer = (() => {
     Globals.setBpm(newBpm);
   };
 
-  return {
-    start,
-    stop,
-    setPattern,
-    setBpm,
-    getPlayhead: () => playhead,
-  };
+return {
+  start,
+  stop,
+  setPattern,
+  setBpm,
+  getPlayhead: () => playhead,
+  isPlaying: () => isPlaying
+};
 })();
 
 export default Sequencer;

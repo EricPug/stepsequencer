@@ -1,3 +1,5 @@
+/// globals.js
+
 const Globals = {
   bpm: 110,
   maxBpm: 300,
