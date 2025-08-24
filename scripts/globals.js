@@ -5,9 +5,8 @@ const Globals = {
   maxBpm: 300,
   minBpm: 30,
   controlknobSpeed: 0.5,
-  runtime: null, // store runtime reference
+  runtime: null,
 
-  // Call this once at startup
   init(runtimeInstance) {
     this.runtime = runtimeInstance;
   },

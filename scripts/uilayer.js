@@ -40,10 +40,62 @@ function initObjects(runtime) {
 }
 
 runOnStartup(async runtime => {
+  // --- Control Knob UI Logic ---
+  let isDraggingKnob = false;
+  let startYKnob = 0;
+  let lastBpmKnob = Globals.bpm;
+  let knobTextObject = null;
+
+  // Initialize display text for knob after layout starts
+  runtime.addEventListener("afterlayoutstart", () => {
+    knobTextObject = runtime.objects.displaytext.getFirstInstance();
+    if (knobTextObject) {
+      knobTextObject.text = String(Math.round(Globals.bpm));
+      console.log("Display text initialized with BPM:", Globals.bpm);
+    } else {
+      console.error("Could not find displaytext object in layout");
+    }
+  });
+
+  // Mouse down: check if knob is clicked
+  runtime.addEventListener("mousedown", () => {
+    const [mx, my] = runtime.mouse.getMousePosition();
+    const knob = runtime.objects.controlknob.getFirstInstance();
+    if (knob && knob.containsPoint(mx, my)) {
+      isDraggingKnob = true;
+      startYKnob = my;
+      return; // Don't process other UI elements if knob is grabbed!! duh!
+    }
+  });
+
+  // Mouse move: update BPM while dragging knob
+  runtime.addEventListener("tick", () => {
+    if (isDraggingKnob) {
+      const [, currentY] = runtime.mouse.getMousePosition();
+      let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;
+      newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
+      if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
+        Globals.setBpm(Math.round(newBpm));
+        lastBpmKnob = Globals.bpm;
+      }
+      if (!knobTextObject) {
+        knobTextObject = runtime.objects.displaytext.getFirstInstance();
+      }
+      if (knobTextObject) {
+        knobTextObject.text = Math.round(Globals.bpm).toString();
+      }
+      startYKnob = currentY;
+      return; // Don't process other UI elements while dragging knob!!
+    }
+  });
+
+  // Mouse up: stop dragging knob
+  runtime.addEventListener("mouseup", () => {
+    isDraggingKnob = false;
+  });
   g_runtime = runtime;
 
   // Wait until layout instances exist.
-  // Using both events so it works like your main.js and also matches docs.
   runtime.addEventListener("afterlayoutstart", () => initObjects(runtime));
   runtime.addEventListener("afteranylayoutstart", () => initObjects(runtime));
 
