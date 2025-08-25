@@ -8,6 +8,32 @@ let stepButtons = [];
 let stepLEDs = [];
 let inited = false;
 
+// LED management helper functions
+function updateLED(led, isActive) {
+  if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
+    return; // Skip LEDs without stepIndex
+  }
+  
+  if (typeof led.animationFrame === "number") {
+    led.animationFrame = isActive ? 1 : 0;
+  } else {
+    led.opacity = isActive ? 1 : 0.2;
+  }
+}
+
+function updateAllLEDs(activeStep = null) {
+  for (const led of stepLEDs) {
+    const isActive = activeStep !== null && led.instVars && led.instVars.stepIndex === activeStep;
+    updateLED(led, isActive);
+  }
+}
+
+function clearAllLEDs() {
+  for (const led of stepLEDs) {
+    updateLED(led, false);
+  }
+}
+
 function initObjects(runtime) {
   if (inited) return;
   try {
@@ -66,25 +92,11 @@ runOnStartup(async runtime => {
       console.log("[ui] Play button clicked!");
       if (!Sequencer.isPlaying()) {
         Sequencer.start((stepIndex /*, pattern, time */) => {
-          // LED highlight per step.
-          for (const led of stepLEDs) {
-            if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
-              continue; // Skip LEDs without stepIndex
-            }
-            
-            if (typeof led.animationFrame === "number") {
-              led.animationFrame = led.instVars.stepIndex === stepIndex ? 1 : 0;
-            } else {
-              led.opacity = led.instVars.stepIndex === stepIndex ? 1 : 0.2;
-            }
-          }
+          updateAllLEDs(stepIndex);
         });
       } else {
         Sequencer.stop();
-        for (const led of stepLEDs) {
-          if (typeof led.animationFrame === "number") led.animationFrame = 0;
-          else led.opacity = 0.2;
-        }
+        clearAllLEDs();
       }
       return; // do not also toggle a step on the same click
     }
@@ -157,18 +169,8 @@ runOnStartup(async runtime => {
 
     // Keep LEDs in sync during playback
     const step = Sequencer.getPlayhead();
-    if (step == null || !stepLEDs.length) return;
-
-    for (const led of stepLEDs) {
-      if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
-        continue; // Skip LEDs without stepIndex
-      }
-
-      if (typeof led.animationFrame === "number") {
-        led.animationFrame = led.instVars.stepIndex === step ? 1 : 0;
-      } else {
-        led.opacity = led.instVars.stepIndex === step ? 1 : 0.2;
-      }
+    if (step != null && stepLEDs.length) {
+      updateAllLEDs(step);
     }
   });
 
