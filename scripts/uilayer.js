@@ -11,7 +11,7 @@ let inited = false;
 // LED management
 function updateLED(led, isActive) {
   if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
-    return; // Skip LEDs without stepIndex
+    return; // Skip LEDs without stepIndex..
   }
   
   if (typeof led.animationFrame === "number") {
@@ -77,13 +77,13 @@ function initObjects(runtime) {
 }
 
 runOnStartup(async runtime => {
-  // --- Control Knob UI Logic ---
+  // Control Knob UI Logic
   let isDraggingKnob = false;
   let startYKnob = 0;
   let knobTextObject = null;
   let knobTextInitialized = false;
 
-  // BPM text management functions
+  // BPM text management
   function initBPMText() {
     if (!knobTextInitialized && runtime.objects.displaytext) {
       knobTextObject = runtime.objects.displaytext.getFirstInstance();
@@ -168,7 +168,7 @@ runOnStartup(async runtime => {
 
         Globals.sequencerState[i][s] = !Globals.sequencerState[i][s];
 
-        // Optional instant visual on the button itself
+        
         if (typeof btn.animationFrame === "number") {
           btn.animationFrame = Globals.sequencerState[i][s] ? 1 : 0;
         }
@@ -179,7 +179,7 @@ runOnStartup(async runtime => {
     return false;
   }
 
-  // mouse down handler
+  // mouse down
   runtime.addEventListener("mousedown", () => {
     // Lazy init if needed
     if (!inited) initObjects(runtime);
@@ -198,7 +198,7 @@ runOnStartup(async runtime => {
     isDraggingKnob = false;
   });
 
-  // Handle knob dragging and LED sync
+  // Handle knob dragging and LED text sync
   runtime.addEventListener("tick", () => {
     // Initialize BPM text display once
     initBPMText();
@@ -206,7 +206,7 @@ runOnStartup(async runtime => {
     // Handle knob dragging (skip LED updates if dragging)
     if (handleKnobDragging()) return;
 
-    // Keep LEDs in sync during playback
+    // Keep LEDs in sync
     const step = Sequencer.getPlayhead();
     if (step != null && stepLEDs.length) {
       updateAllLEDs(step);
