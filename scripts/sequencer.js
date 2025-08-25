@@ -25,7 +25,7 @@ const Sequencer = (() => {
     // Trigger samples for active instruments
     for (let i = 0; i < Globals.instrumentCount; i++) {
       if (pattern[i][stepIndex]) {
-        playSample(i, time); // time in AudioContext seconds
+        playSample(i);
       }
     }
   };
