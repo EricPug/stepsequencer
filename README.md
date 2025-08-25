@@ -1,4 +1,4 @@
-# Erictakt-1 (working title! haha)
+# Erictakt-1
 
 Sample step sequencer built in Construct 3.  
 
