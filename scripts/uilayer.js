@@ -8,7 +8,7 @@ let stepButtons = [];
 let stepLEDs = [];
 let inited = false;
 
-// LED management helper functions
+// LED management
 function updateLED(led, isActive) {
   if (!led.instVars || typeof led.instVars.stepIndex === 'undefined') {
     return; // Skip LEDs without stepIndex
@@ -34,7 +34,7 @@ function clearAllLEDs() {
   }
 }
 
-// Button validation helper functions
+// Button validation
 function hasValidInstanceVars(obj) {
   return obj.instVars && 
          typeof obj.instVars.instrumentIndex !== 'undefined' && 
@@ -57,7 +57,7 @@ function initObjects(runtime) {
       `[ui] init OK. playButton=${!!playButton} buttons=${stepButtons.length} leds=${stepLEDs.length}`
     );
     
-    // Diagnostic: Check all buttons for missing instance variables
+    // Check all buttons for missing instance variables
     let missingVars = 0;
     for (const btn of stepButtons) {
       if (!hasValidInstanceVars(btn)) {
@@ -179,7 +179,7 @@ runOnStartup(async runtime => {
     return false;
   }
 
-  // Main mouse down handler
+  // mouse down handler
   runtime.addEventListener("mousedown", () => {
     // Lazy init if needed
     if (!inited) initObjects(runtime);
@@ -193,7 +193,7 @@ runOnStartup(async runtime => {
     handleStepButtonClick(mx, my);
   });
 
-  // Mouse up: stop dragging knob
+  // Mouse up
   runtime.addEventListener("mouseup", () => {
     isDraggingKnob = false;
   });

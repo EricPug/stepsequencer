@@ -1,4 +1,5 @@
 // playsample.js
+
 import Globals from "./globals.js";
 
 export const playSample = (trackIndex) => {
@@ -9,7 +10,7 @@ export const playSample = (trackIndex) => {
   }
 
   if (typeof runtime.callFunction !== "function") {
-    console.error("Functions plugin is not available. Please add it to your project.");
+    console.error("Functions plugin missing. Please add it.");
     return;
   }
 
@@ -17,9 +18,9 @@ export const playSample = (trackIndex) => {
   const functionName = `play_${trackIndex}`;
 
   try {
-    // Call the dedicated function for this track index.
+    // Call the function for this track index.
     runtime.callFunction(functionName);
   } catch (e) {
-    console.error(`Error calling function "${functionName}": ${e.message}. Make sure the function exists in your event sheet and has no parameters.`);
+    console.error(`Error calling construct event sheet function "${functionName}": ${e.message}. Make sure the function exists.`);
   }
 };

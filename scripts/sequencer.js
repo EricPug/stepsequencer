@@ -1,6 +1,5 @@
 /// sequencer.js
 
-
 import Globals from "./globals.js";
 import { playSample } from "./playsample.js";
 

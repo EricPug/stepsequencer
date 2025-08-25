@@ -8,7 +8,7 @@ runOnStartup(async runtime => {
   Globals.runtime = runtime;
   
   if (!runtime.objects.Audio) {
-    console.error("[main] No Audio object found in project");
+    console.error("[main] No Audio object found in project!!");
     return;
   }
   
