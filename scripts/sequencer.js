@@ -60,21 +60,9 @@ const Sequencer = (() => {
     schedulerId = null;
   };
 
-  // Swap pattern mid-playback
-  const setPattern = (newPattern) => {
-    pattern = newPattern;
-  };
-
-  // Update BPM mid-playback
-  const setBpm = (newBpm) => {
-    Globals.setBpm(newBpm);
-  };
-
 return {
   start,
   stop,
-  setPattern,
-  setBpm,
   getPlayhead: () => playhead,
   isPlaying: () => isPlaying
 };

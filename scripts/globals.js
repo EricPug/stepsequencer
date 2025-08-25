@@ -17,10 +17,6 @@ const Globals = {
     "808snare"
   ],
 
-  init(runtimeInstance) {
-    this.runtime = runtimeInstance;
-  },
-
   setBpm(newBpm) {
     this.bpm = newBpm;
   },
