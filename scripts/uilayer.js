@@ -83,23 +83,18 @@ runOnStartup(async runtime => {
   let knobTextObject = null;
   let knobTextInitialized = false;
 
-  // Mouse down: check if knob is clicked, then handle other UI elements
-  runtime.addEventListener("mousedown", () => {
-    // Lazy init if needed
-    if (!inited) initObjects(runtime);
-
-    const [mx, my] = runtime.mouse.getMousePosition();
-    console.log("[ui] mousedown", mx, my);
-
-    // Check knob first
+  // Mouse interaction handlers
+  function handleKnobClick(mx, my) {
     const knob = runtime.objects.controlknob.getFirstInstance();
     if (knob && knob.containsPoint(mx, my)) {
       isDraggingKnob = true;
       startYKnob = my;
-      return; // Don't process other UI elements if knob is grabbed
+      return true; // Handled - don't process other UI elements
     }
+    return false;
+  }
 
-    // Play/Stop
+  function handlePlayButtonClick(mx, my) {
     if (playButton && playButton.containsPoint(mx, my)) {
       console.log("[ui] Play button clicked!");
       if (!Sequencer.isPlaying()) {
@@ -110,39 +105,56 @@ runOnStartup(async runtime => {
         Sequencer.stop();
         clearAllLEDs();
       }
-      return; // do not also toggle a step on the same click
+      return true; // Handled - don't process step buttons
     }
+    return false;
+  }
 
-    // Step toggles
-    if (stepButtons.length) {
-      for (const btn of stepButtons) {
-        if (btn.containsPoint(mx, my)) {
-          // Validate instance variables
-          if (!hasValidInstanceVars(btn)) {
-            console.warn('[ui] Button missing instance variables. Has instVars:', !!btn.instVars);
-            continue;
-          }
+  function handleStepButtonClick(mx, my) {
+    if (!stepButtons.length) return false;
 
-          const i = btn.instVars.instrumentIndex | 0;
-          const s = btn.instVars.stepIndex | 0;
-
-          // Validate indices are within expected ranges
-          if (!validateButtonIndices(i, s)) {
-            console.warn('[ui] Button has invalid indices. instrumentIndex:', i, 'stepIndex:', s);
-            continue;
-          }
-
-          Globals.sequencerState[i][s] = !Globals.sequencerState[i][s];
-
-          // Optional instant visual on the button itself
-          if (typeof btn.animationFrame === "number") {
-            btn.animationFrame = Globals.sequencerState[i][s] ? 1 : 0;
-          }
-          console.log(`[ui] toggle inst=${i} step=${s} -> ${Globals.sequencerState[i][s]}`);
-          return;
+    for (const btn of stepButtons) {
+      if (btn.containsPoint(mx, my)) {
+        // Validate instance variables
+        if (!hasValidInstanceVars(btn)) {
+          console.warn('[ui] Button missing instance variables. Has instVars:', !!btn.instVars);
+          continue;
         }
+
+        const i = btn.instVars.instrumentIndex | 0;
+        const s = btn.instVars.stepIndex | 0;
+
+        // Validate indices are within expected ranges
+        if (!validateButtonIndices(i, s)) {
+          console.warn('[ui] Button has invalid indices. instrumentIndex:', i, 'stepIndex:', s);
+          continue;
+        }
+
+        Globals.sequencerState[i][s] = !Globals.sequencerState[i][s];
+
+        // Optional instant visual on the button itself
+        if (typeof btn.animationFrame === "number") {
+          btn.animationFrame = Globals.sequencerState[i][s] ? 1 : 0;
+        }
+        console.log(`[ui] toggle inst=${i} step=${s} -> ${Globals.sequencerState[i][s]}`);
+        return true; // Handled
       }
     }
+    return false;
+  }
+
+  // Main mouse down handler
+  runtime.addEventListener("mousedown", () => {
+    // Lazy init if needed
+    if (!inited) initObjects(runtime);
+
+    const [mx, my] = runtime.mouse.getMousePosition();
+    console.log("[ui] mousedown", mx, my);
+
+    // Handle interactions in priority order
+    if (handleKnobClick(mx, my)) return;
+    if (handlePlayButtonClick(mx, my)) return;
+    handleStepButtonClick(mx, my);
   });
 
   // Mouse up: stop dragging knob
