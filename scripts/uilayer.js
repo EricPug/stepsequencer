@@ -45,61 +45,21 @@ runOnStartup(async runtime => {
   let knobTextObject = null;
   let knobTextInitialized = false;
 
-  // Mouse down: check if knob is clicked
-  runtime.addEventListener("mousedown", () => {
-    const [mx, my] = runtime.mouse.getMousePosition();
-    const knob = runtime.objects.controlknob.getFirstInstance();
-    if (knob && knob.containsPoint(mx, my)) {
-      isDraggingKnob = true;
-      startYKnob = my;
-      return; // Don't process other UI elements if knob is grabbed!! duh!
-    }
-  });
-
-  // Mouse move: update BPM while dragging knob
-  runtime.addEventListener("tick", () => {
-    // One-time initialization for the knob text
-    if (!knobTextInitialized && runtime.objects.displaytext) {
-      knobTextObject = runtime.objects.displaytext.getFirstInstance();
-      if (knobTextObject) {
-        knobTextObject.text = Math.round(Globals.bpm).toString();
-        knobTextInitialized = true;
-      }
-    }
-
-    if (isDraggingKnob) {
-      const [, currentY] = runtime.mouse.getMousePosition();
-      let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;
-      newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
-      if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
-        Globals.setBpm(Math.round(newBpm));
-      }
-      if (!knobTextObject) {
-        knobTextObject = runtime.objects.displaytext.getFirstInstance();
-      }
-      if (knobTextObject) {
-        knobTextObject.text = Math.round(Globals.bpm).toString();
-      }
-      startYKnob = currentY;
-      return; // Don't process other UI elements while dragging knob!!
-    }
-  });
-
-  // Mouse up: stop dragging knob
-  runtime.addEventListener("mouseup", () => {
-    isDraggingKnob = false;
-  });
-
-  // Wait until layout instances exist.
-  runtime.addEventListener("afterlayoutstart", () => initObjects(runtime));
-
-  // One mouse handler for both play and step buttons
+  // Mouse down: check if knob is clicked, then handle other UI elements
   runtime.addEventListener("mousedown", () => {
     // Lazy init if needed
     if (!inited) initObjects(runtime);
 
     const [mx, my] = runtime.mouse.getMousePosition();
     console.log("[ui] mousedown", mx, my);
+
+    // Check knob first
+    const knob = runtime.objects.controlknob.getFirstInstance();
+    if (knob && knob.containsPoint(mx, my)) {
+      isDraggingKnob = true;
+      startYKnob = my;
+      return; // Don't process other UI elements if knob is grabbed
+    }
 
     // Play/Stop
     if (playButton && playButton.containsPoint(mx, my)) {
@@ -161,8 +121,41 @@ runOnStartup(async runtime => {
     }
   });
 
-  // Keep LEDs in sync during playback
+  // Mouse up: stop dragging knob
+  runtime.addEventListener("mouseup", () => {
+    isDraggingKnob = false;
+  });
+
+  // Handle knob dragging and LED sync
   runtime.addEventListener("tick", () => {
+    // One-time initialization for the knob text
+    if (!knobTextInitialized && runtime.objects.displaytext) {
+      knobTextObject = runtime.objects.displaytext.getFirstInstance();
+      if (knobTextObject) {
+        knobTextObject.text = Math.round(Globals.bpm).toString();
+        knobTextInitialized = true;
+      }
+    }
+
+    // Handle knob dragging
+    if (isDraggingKnob) {
+      const [, currentY] = runtime.mouse.getMousePosition();
+      let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;
+      newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
+      if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
+        Globals.setBpm(Math.round(newBpm));
+      }
+      if (!knobTextObject) {
+        knobTextObject = runtime.objects.displaytext.getFirstInstance();
+      }
+      if (knobTextObject) {
+        knobTextObject.text = Math.round(Globals.bpm).toString();
+      }
+      startYKnob = currentY;
+      return; // Don't process LED updates while dragging knob
+    }
+
+    // Keep LEDs in sync during playback
     const step = Sequencer.getPlayhead();
     if (step == null || !stepLEDs.length) return;
 
@@ -178,4 +171,7 @@ runOnStartup(async runtime => {
       }
     }
   });
+
+  // Wait until layout instances exist.
+  runtime.addEventListener("afterlayoutstart", () => initObjects(runtime));
 });
