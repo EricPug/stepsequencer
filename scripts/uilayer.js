@@ -83,6 +83,26 @@ runOnStartup(async runtime => {
   let knobTextObject = null;
   let knobTextInitialized = false;
 
+  // BPM text management functions
+  function initBPMText() {
+    if (!knobTextInitialized && runtime.objects.displaytext) {
+      knobTextObject = runtime.objects.displaytext.getFirstInstance();
+      if (knobTextObject) {
+        knobTextObject.text = Math.round(Globals.bpm).toString();
+        knobTextInitialized = true;
+      }
+    }
+  }
+
+  function updateBPMText() {
+    if (!knobTextObject) {
+      knobTextObject = runtime.objects.displaytext.getFirstInstance();
+    }
+    if (knobTextObject) {
+      knobTextObject.text = Math.round(Globals.bpm).toString();
+    }
+  }
+
   // Mouse interaction handlers
   function handleKnobClick(mx, my) {
     const knob = runtime.objects.controlknob.getFirstInstance();
@@ -164,14 +184,8 @@ runOnStartup(async runtime => {
 
   // Handle knob dragging and LED sync
   runtime.addEventListener("tick", () => {
-    // One-time initialization for the knob text
-    if (!knobTextInitialized && runtime.objects.displaytext) {
-      knobTextObject = runtime.objects.displaytext.getFirstInstance();
-      if (knobTextObject) {
-        knobTextObject.text = Math.round(Globals.bpm).toString();
-        knobTextInitialized = true;
-      }
-    }
+    // Initialize BPM text display once
+    initBPMText();
 
     // Handle knob dragging
     if (isDraggingKnob) {
@@ -181,12 +195,7 @@ runOnStartup(async runtime => {
       if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
         Globals.setBpm(Math.round(newBpm));
       }
-      if (!knobTextObject) {
-        knobTextObject = runtime.objects.displaytext.getFirstInstance();
-      }
-      if (knobTextObject) {
-        knobTextObject.text = Math.round(Globals.bpm).toString();
-      }
+      updateBPMText();
       startYKnob = currentY;
       return; // Don't process LED updates while dragging knob
     }
