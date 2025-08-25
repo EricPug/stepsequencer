@@ -103,6 +103,22 @@ runOnStartup(async runtime => {
     }
   }
 
+  function handleKnobDragging() {
+    if (!isDraggingKnob) return false;
+    
+    const [, currentY] = runtime.mouse.getMousePosition();
+    let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;
+    newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
+    
+    if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
+      Globals.setBpm(Math.round(newBpm));
+    }
+    
+    updateBPMText();
+    startYKnob = currentY;
+    return true; // Handled - skip other tick processing
+  }
+
   // Mouse interaction handlers
   function handleKnobClick(mx, my) {
     const knob = runtime.objects.controlknob.getFirstInstance();
@@ -187,18 +203,8 @@ runOnStartup(async runtime => {
     // Initialize BPM text display once
     initBPMText();
 
-    // Handle knob dragging
-    if (isDraggingKnob) {
-      const [, currentY] = runtime.mouse.getMousePosition();
-      let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;
-      newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
-      if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
-        Globals.setBpm(Math.round(newBpm));
-      }
-      updateBPMText();
-      startYKnob = currentY;
-      return; // Don't process LED updates while dragging knob
-    }
+    // Handle knob dragging (skip LED updates if dragging)
+    if (handleKnobDragging()) return;
 
     // Keep LEDs in sync during playback
     const step = Sequencer.getPlayhead();
