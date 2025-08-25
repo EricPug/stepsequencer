@@ -34,6 +34,18 @@ function clearAllLEDs() {
   }
 }
 
+// Button validation helper functions
+function hasValidInstanceVars(obj) {
+  return obj.instVars && 
+         typeof obj.instVars.instrumentIndex !== 'undefined' && 
+         typeof obj.instVars.stepIndex !== 'undefined';
+}
+
+function validateButtonIndices(instrumentIndex, stepIndex) {
+  return instrumentIndex >= 0 && instrumentIndex < 8 && 
+         stepIndex >= 0 && stepIndex < 16;
+}
+
 function initObjects(runtime) {
   if (inited) return;
   try {
@@ -48,7 +60,7 @@ function initObjects(runtime) {
     // Diagnostic: Check all buttons for missing instance variables
     let missingVars = 0;
     for (const btn of stepButtons) {
-      if (!btn.instVars || typeof btn.instVars.instrumentIndex === 'undefined' || typeof btn.instVars.stepIndex === 'undefined') {
+      if (!hasValidInstanceVars(btn)) {
         missingVars++;
       }
     }
@@ -105,8 +117,8 @@ runOnStartup(async runtime => {
     if (stepButtons.length) {
       for (const btn of stepButtons) {
         if (btn.containsPoint(mx, my)) {
-          // Access instance variables through instVars property
-          if (!btn.instVars || typeof btn.instVars.instrumentIndex === 'undefined' || typeof btn.instVars.stepIndex === 'undefined') {
+          // Validate instance variables
+          if (!hasValidInstanceVars(btn)) {
             console.warn('[ui] Button missing instance variables. Has instVars:', !!btn.instVars);
             continue;
           }
@@ -114,8 +126,8 @@ runOnStartup(async runtime => {
           const i = btn.instVars.instrumentIndex | 0;
           const s = btn.instVars.stepIndex | 0;
 
-          // Extra validation
-          if (i < 0 || i >= 8 || s < 0 || s >= 16) {
+          // Validate indices are within expected ranges
+          if (!validateButtonIndices(i, s)) {
             console.warn('[ui] Button has invalid indices. instrumentIndex:', i, 'stepIndex:', s);
             continue;
           }
