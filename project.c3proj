@@ -3,13 +3,20 @@
 	"savedWithRelease": 44902,
 	"name": "sequencer",
 	"runtime": "c3",
-	"useWorker": "dom",
+	"useWorker": "auto",
 	"bundleAddons": false,
 	"usedAddons": [
 		{
 			"type": "plugin",
 			"id": "Audio",
 			"name": "Audio",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "FileSystem",
+			"name": "File system",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -61,7 +68,8 @@
 			"controlknob",
 			"Mouse",
 			"Text3",
-			"Audio"
+			"Audio",
+			"FileSystem"
 		],
 		"subfolders": []
 	},
@@ -134,49 +142,9 @@
 		"sound": {
 			"items": [
 				{
-					"name": "808cow.webm",
-					"type": "audio/webm; codecs=opus",
-					"sid": 631081501660626,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "808maracas.webm",
-					"type": "audio/webm; codecs=opus",
-					"sid": 335131919076814,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "808ohh.webm",
-					"type": "audio/webm; codecs=opus",
-					"sid": 285552200104460,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "808rim.webm",
-					"type": "audio/webm; codecs=opus",
-					"sid": 921828837747434,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
-					"name": "808snare.webm",
-					"type": "audio/webm; codecs=opus",
-					"sid": 747469488948711,
-					"file-info": {
-						"purpose": "none"
-					}
-				},
-				{
 					"name": "808bass.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 281778075326675,
+					"sid": 512762594276319,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -184,7 +152,7 @@
 				{
 					"name": "808chh.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 770718780231518,
+					"sid": 888148651037360,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -192,7 +160,47 @@
 				{
 					"name": "808claves.webm",
 					"type": "audio/webm; codecs=opus",
-					"sid": 234366491715451,
+					"sid": 305954386546347,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808cow.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 630277983912510,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808maracas.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 621000327150417,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808ohh.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 896682515515839,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808rim.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 845614577578554,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "808snare.webm",
+					"type": "audio/webm; codecs=opus",
+					"sid": 490234587567964,
 					"file-info": {
 						"purpose": "none"
 					}
@@ -304,8 +312,8 @@
 		"pixelRounding": true,
 		"zAxisScale": "normalized",
 		"fov": 0.7853981633974483,
-		"useLoaderLayout": false,
-		"fullscreenMode": "letterbox-integer-scale",
+		"useLoaderLayout": true,
+		"fullscreenMode": "letterbox-scale",
 		"fullscreenQuality": "low",
 		"viewportFit": "auto",
 		"backgroundColor": [
@@ -348,5 +356,5 @@
 	},
 	"viewportWidth": 1600,
 	"viewportHeight": 1200,
-	"firstLayout": null
+	"firstLayout": "Layout 1"
 }

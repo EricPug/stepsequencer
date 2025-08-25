@@ -2,228 +2,212 @@
 	"name": "Event sheet 1",
 	"events": [
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 491312982576954,
-					"parameters": {
-						"tag": "\"808bass\""
-					}
-				}
-			],
+			"functionName": "play_0",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 110227238241066,
+					"sid": 147836275792876,
 					"parameters": {
 						"audio-file": "808bass",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 227206982401119
+			"sid": 305166089860314
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 575922978422225,
-					"parameters": {
-						"tag": "\"808chh\""
-					}
-				}
-			],
+			"functionName": "play_1",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 955732822287576,
+					"sid": 618280563568273,
 					"parameters": {
 						"audio-file": "808chh",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 779948190734305
+			"sid": 837121605153368
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 947245534367148,
-					"parameters": {
-						"tag": "\"808claves\""
-					}
-				}
-			],
+			"functionName": "play_2",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 586221917510841,
+					"sid": 965572413832933,
 					"parameters": {
 						"audio-file": "808claves",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 857724667980945
+			"sid": 667805954974946
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 747555265827893,
-					"parameters": {
-						"tag": "\"808cow\""
-					}
-				}
-			],
+			"functionName": "play_3",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 353900672376146,
+					"sid": 186599709164798,
 					"parameters": {
 						"audio-file": "808cow",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 473050663282010
+			"sid": 991416249194465
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 930074299440561,
-					"parameters": {
-						"tag": "\"808maracas\""
-					}
-				}
-			],
+			"functionName": "play_4",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 937941748019080,
+					"sid": 998185427224360,
 					"parameters": {
 						"audio-file": "808maracas",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 364787827431498
+			"sid": 788979011218343
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 714774422511191,
-					"parameters": {
-						"tag": "\"808ohh\""
-					}
-				}
-			],
+			"functionName": "play_5",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 526046466506426,
+					"sid": 332929792553342,
 					"parameters": {
 						"audio-file": "808ohh",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 957626263508526
+			"sid": 956534290208065
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 975975718233887,
-					"parameters": {
-						"tag": "\"808rim\""
-					}
-				}
-			],
+			"functionName": "play_6",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 423725554437614,
+					"sid": 189287004566867,
 					"parameters": {
 						"audio-file": "808rim",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 758251510398495
+			"sid": 510044303493083
 		},
 		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-signal",
-					"objectClass": "System",
-					"sid": 604845825057546,
-					"parameters": {
-						"tag": "\"808snare\""
-					}
-				}
-			],
+			"functionName": "play_7",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
 			"actions": [
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 413774626409362,
+					"sid": 967178064145228,
 					"parameters": {
 						"audio-file": "808snare",
 						"loop": "not-looping",
-						"volume": "12",
+						"volume": "0",
 						"stereo-pan": "0",
 						"tag-optional": "\"\""
 					}
 				}
 			],
-			"sid": 984937775982672
+			"sid": 733352628367185
 		}
 	],
 	"sid": 533021385195674

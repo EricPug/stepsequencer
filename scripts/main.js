@@ -17,13 +17,16 @@ const sampleFiles = [
   "808OHH.webm"
 ];
 
-// Initialize audio using Construct's Audio object
 function initAudio(runtime) {
   // Verify Audio object exists
   const audio = runtime.objects.Audio;
   if (!audio) {
     console.error("[audio] No Audio object found in project");
     return false;
+  }
+  else
+  {
+        console.log("[audio] Audio object found in project");
   }
 
   // Store the sample names in Globals for use by other modules
