@@ -24,9 +24,7 @@ const Globals = {
   // Sequencer data
   stepsPerInstrument: 16,
   instrumentCount: 8,
-  sequencerState: Array.from({ length: 8 }, () =>
-    Array(16).fill(false)
-  )
+  sequencerState: new Array(8).fill(null).map(() => new Array(16).fill(false))
 };
 
 export default Globals;
