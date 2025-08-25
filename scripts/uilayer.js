@@ -45,17 +45,7 @@ runOnStartup(async runtime => {
   let startYKnob = 0;
   let lastBpmKnob = Globals.bpm;
   let knobTextObject = null;
-
-  // Initialize display text for knob after layout starts
-  runtime.addEventListener("afterlayoutstart", () => {
-    knobTextObject = runtime.objects.displaytext.getFirstInstance();
-    if (knobTextObject) {
-      knobTextObject.text = String(Math.round(Globals.bpm));
-      console.log("Display text initialized with BPM:", Globals.bpm);
-    } else {
-      console.error("Could not find displaytext object in layout");
-    }
-  });
+  let knobTextInitialized = false; // Add this flag
 
   // Mouse down: check if knob is clicked
   runtime.addEventListener("mousedown", () => {
@@ -70,6 +60,15 @@ runOnStartup(async runtime => {
 
   // Mouse move: update BPM while dragging knob
   runtime.addEventListener("tick", () => {
+    // One-time initialization for the knob text
+    if (!knobTextInitialized && runtime.objects.displaytext) {
+      knobTextObject = runtime.objects.displaytext.getFirstInstance();
+      if (knobTextObject) {
+        knobTextObject.text = Math.round(Globals.bpm).toString();
+        knobTextInitialized = true;
+      }
+    }
+
     if (isDraggingKnob) {
       const [, currentY] = runtime.mouse.getMousePosition();
       let newBpm = Globals.bpm + (startYKnob - currentY) * Globals.controlknobSpeed;

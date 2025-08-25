@@ -41,9 +41,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 618280563568273,
+					"sid": 776623241990929,
 					"parameters": {
-						"audio-file": "808chh",
+						"audio-file": "808snare",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -67,9 +67,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 965572413832933,
+					"sid": 917191093973580,
 					"parameters": {
-						"audio-file": "808claves",
+						"audio-file": "808chh",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -93,9 +93,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 186599709164798,
+					"sid": 833835955981908,
 					"parameters": {
-						"audio-file": "808cow",
+						"audio-file": "808ohh",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -119,9 +119,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 998185427224360,
+					"sid": 417897696597837,
 					"parameters": {
-						"audio-file": "808maracas",
+						"audio-file": "808rim",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -145,9 +145,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 332929792553342,
+					"sid": 296617299763950,
 					"parameters": {
-						"audio-file": "808ohh",
+						"audio-file": "808claves",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -171,9 +171,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 189287004566867,
+					"sid": 910929771278348,
 					"parameters": {
-						"audio-file": "808rim",
+						"audio-file": "808maracas",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
@@ -197,9 +197,9 @@
 				{
 					"id": "play",
 					"objectClass": "Audio",
-					"sid": 967178064145228,
+					"sid": 288291145727298,
 					"parameters": {
-						"audio-file": "808snare",
+						"audio-file": "808cow",
 						"loop": "not-looping",
 						"volume": "0",
 						"stereo-pan": "0",
