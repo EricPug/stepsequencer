@@ -7,5 +7,10 @@ export const playSample = (trackIndex) => {
 
   const name = Globals.signalNames[trackIndex];
   console.log(`[audio] Sending signal: ${name} (track ${trackIndex})`);
-  rt.signal(name);               // this triggers System "On signal <name>"
+  
+  // Get System plugin and set signal value
+  const system = rt.objects.System;
+  if (system) {
+    system.setSignalValue(name, 1);
+  }               // this triggers System "On signal <name>"
 };
