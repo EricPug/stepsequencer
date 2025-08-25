@@ -13,7 +13,7 @@ export const playSample = (trackIndex) => {
     return;
   }
 
-  // Construct the function name based on the track index, e.g., "play_0", "play_1".
+  // function name based on the track index, e.g., "play_0", "play_1".
   const functionName = `play_${trackIndex}`;
 
   try {

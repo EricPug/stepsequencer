@@ -3,7 +3,6 @@
 import Globals from "./globals.js";
 import Sequencer from "./sequencer.js";
 
-let g_runtime = null;
 let playButton = null;
 let stepButtons = [];
 let stepLEDs = [];
@@ -43,9 +42,8 @@ runOnStartup(async runtime => {
   // --- Control Knob UI Logic ---
   let isDraggingKnob = false;
   let startYKnob = 0;
-  let lastBpmKnob = Globals.bpm;
   let knobTextObject = null;
-  let knobTextInitialized = false; // Add this flag
+  let knobTextInitialized = false;
 
   // Mouse down: check if knob is clicked
   runtime.addEventListener("mousedown", () => {
@@ -75,7 +73,6 @@ runOnStartup(async runtime => {
       newBpm = Math.min(Globals.maxBpm, Math.max(Globals.minBpm, newBpm));
       if (Math.round(newBpm) !== Math.round(Globals.bpm)) {
         Globals.setBpm(Math.round(newBpm));
-        lastBpmKnob = Globals.bpm;
       }
       if (!knobTextObject) {
         knobTextObject = runtime.objects.displaytext.getFirstInstance();
@@ -92,11 +89,9 @@ runOnStartup(async runtime => {
   runtime.addEventListener("mouseup", () => {
     isDraggingKnob = false;
   });
-  g_runtime = runtime;
 
   // Wait until layout instances exist.
   runtime.addEventListener("afterlayoutstart", () => initObjects(runtime));
-  runtime.addEventListener("afteranylayoutstart", () => initObjects(runtime));
 
   // One mouse handler for both play and step buttons
   runtime.addEventListener("mousedown", () => {
